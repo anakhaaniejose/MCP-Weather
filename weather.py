@@ -15,18 +15,19 @@ def get_weather(location: str) -> str:
     Returns:
         str: A description of the current weather.
     """
-    try:
-        # Use CoinGecko API to fetch current price in USD
-        loc_lower=location.lower()
-        url = f"https://api.weatherapi.com/v1/current.json?q={loc_lower}&lang=English&key=f65eb6bc1da341788a072016262704"
-        # params = {"ids": crypto.lower(), "vs_currencies": "usd"}
-        response = requests.get(url).json()
-        temp = response["current"]["temp_c"]
-        condition = response["current"]["condition"]["text"]
-    
-        return f"{location}: {temp}°C, {condition}"
-    except Exception as e:
-        return f"Error fetching weather for {location}: {e}"
+    weather_data = {
+        "san francisco": "Sunny, 72 degrees F",
+        "new york": "Cloudy, 65 degrees F",
+        "london": "Rainy, 58 degrees F",
+        "tokyo": "Clear, 68 degrees F"
+    }
+    # Here you would implement the logic to fetch the weather data from an API
+    # For demonstration purposes, we'll return a dummy weather report
+    location_key = location.lower()
+    if location_key in weather_data:
+        return f"The current weather in {location} is {weather_data[location_key]}."
+    else:
+        return f"No weather information found for '{location}'."
 
 if __name__ == "__main__":
     mcp.run()
